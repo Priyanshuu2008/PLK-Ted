@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Teddy Day 🧸</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #ffb6c1, #ffe4e1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.card {
+    width: 90%;
+    max-width: 350px;
+    background: #fff;
+    border-radius: 20px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    animation: pop 0.6s ease;
+    z-index: 2;
+}
+
+@keyframes pop {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+h1 { color: #ff4d6d; }
+
+p {
+    font-size: 16px;
+    color: #444;
+    line-height: 1.6;
+}
+
+.teddy {
+    font-size: 70px;
+    animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+button {
+    margin-top: 20px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    background: #ff4d6d;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+button:hover { background: #e63956; }
+
+/* Hearts */
+.heart {
+    position: absolute;
+    color: #ff4d6d;
+    font-size: 20px;
+    animation: float 4s linear infinite;
+    z-index: 1;
+}
+
+@keyframes float {
+    0% { bottom: -10px; opacity: 1; }
+    100% { bottom: 110%; opacity: 0; }
+}
+
+/* Fireworks */
+.firework {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    animation: explode 1s ease-out forwards;
+    z-index: 1;
+}
+
+@keyframes explode {
+    from { transform: scale(1); opacity: 1; }
+    to { transform: scale(6); opacity: 0; }
+}
+</style>
+</head>
+<body>
+
+<div class="card" id="screen">
+    <div class="teddy">🧸</div>
+    <h1>Happy Teddy Day</h1>
+    <p>
+        Hey <b>plk</b> 💖<br>
+        Ye teddy sirf gift nahi,<br>
+        meri feelings ka soft sa symbol hai 🥰
+    </p>
+    <button onclick="nextScreen()">Next 🎀</button>
+</div>
+
+<script>
+let step = 0;
+let fireworkInterval = null;
+
+function nextScreen() {
+    const screen = document.getElementById("screen");
+
+    if (step === 0) {
+        screen.innerHTML = `
+            <div class="teddy">🐻‍❄️</div>
+            <h1>Surprise 1 🎁</h1>
+            <p>
+                plk 💕<br>
+                Tumhari smile meri favourite habit ban chuki hai,<br>
+                aur tumhari yaadein mere din ka best part 😘
+            </p>
+            <button onclick="nextScreen()">Next 💌</button>
+        `;
+    } 
+    else if (step === 1) {
+        screen.innerHTML = `
+            <div class="teddy">🧸</div>
+            <h1>Final Surprise 💖</h1>
+            <p>
+                plk 🌸<br>
+                Agar main teddy hota,<br>
+                toh sirf tumhari baahon mein rehna chahta 🤍<br><br>
+                Happy Teddy Day 🥰
+            </p>
+            <button onclick="startCelebration()">Feel the Love 💞</button>
+        `;
+    }
+    step++;
+}
+
+function startCelebration() {
+    hearts();
+    fireworks();
+    if (!fireworkInterval) {
+        fireworkInterval = setInterval(fireworks, 2000);
+    }
+}
+
+function hearts() {
+    for (let i = 0; i < 20; i++) {
+        let heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 4000);
+    }
+}
+
+function fireworks() {
+    for (let i = 0; i < 15; i++) {
+        let fw = document.createElement("div");
+        fw.className = "firework";
+        fw.style.left = Math.random() * 100 + "vw";
+        fw.style.top = Math.random() * 100 + "vh";
+        fw.style.background =
+            ["#ff4d6d","#ffd166","#06d6a0","#4cc9f0"][Math.floor(Math.random()*4)];
+        document.body.appendChild(fw);
+        setTimeout(() => fw.remove(), 1000);
+    }
+}
+</script>
+
+</body>
+</html>
