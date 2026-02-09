@@ -93,6 +93,22 @@ button:hover { background: #e63956; }
     from { transform: scale(1); opacity: 1; }
     to { transform: scale(6); opacity: 0; }
 }
+
+/* Teddy & Kiss Falling */
+.fall {
+    position: absolute;
+    top: -20px;
+    font-size: 24px;
+    animation: fall linear infinite;
+    z-index: 1;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh);
+        opacity: 0;
+    }
+}
 </style>
 </head>
 <body>
@@ -112,13 +128,25 @@ button:hover { background: #e63956; }
 let step = 0;
 let fireworkInterval = null;
 
+/* Falling emojis start */
+setInterval(() => {
+    const emoji = document.createElement("div");
+    emoji.className = "fall";
+    emoji.innerHTML = Math.random() > 0.5 ? "🧸" : "😘";
+    emoji.style.left = Math.random() * 100 + "vw";
+    emoji.style.animationDuration = (Math.random() * 3 + 4) + "s";
+    document.body.appendChild(emoji);
+
+    setTimeout(() => emoji.remove(), 7000);
+}, 700);
+
 function nextScreen() {
     const screen = document.getElementById("screen");
 
     if (step === 0) {
         screen.innerHTML = `
             <div class="teddy">🐻‍❄️</div>
-            <h1>For you...</h1>
+            <h1>For you... 🎁</h1>
             <p>
                 plk 💕<br>
                 Tumhari smile meri favourite habit ban chuki hai,<br>
